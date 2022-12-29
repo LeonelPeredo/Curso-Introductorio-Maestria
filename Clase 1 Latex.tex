@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{courier}
+\usepackage{listings}
+
+
+\title{R Clase 1}
+\author{Leonel Peredo}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+\item 
+Escriba: \\
+a) Una función que convierta una temperatura en grados Celsius a grados Fahrenheit \\
+b) Otro programa que se haga la operación inversa (de Fahrenheit a Celsius) \\
+c) Verifique que aplicar una función seguida de la otra devuelven el valor original. 
+
+\item  Cree una función que dado un cuadrado, a partir de la variable \texttt{base}, calcule su perímetro y su área.
+
+\item Construya una función \texttt{es\_cuadrado\_perfecto} que devuelva un \textbf{booleano} según el input \texttt{x} es o no un cuadrado perfecto (existe $k$ tal que $k^2$)
+
+\item Arme una función que dado un vector numérico \texttt{x} devuelve un vector con la media muestral y, la mediana. Use el siguiente modelo como base:
+
+\begin{lstlisting}[language=R]
+medias = function(x) {
+    return(c(mean(x),median(x)))
+}
+\end{lstlisting}
+
+Una vez definida la función medias ejecute la siguente línea:
+
+\begin{lstlisting}[language=R]
+replicaciones = replicate(10000, medias(rnorm(100)))
+\end{lstlisting}
+
+Extraiga de la matriz \texttt{replicaciones} las medias y medianas y asígnelas a los vectores  \texttt{las\_medias} y  \texttt{las\_medianas} respectivamente. Luego ejecute el siguiente código para graficar:
+
+\begin{lstlisting}[language=R]
+colores = c("skyblue3", "orange")
+densidades = c(50, 30)
+# las_medias = ...
+hist(las_medias, density=densidades[1], col = colores[1])
+# las_medianas = ...
+hist(las_medianas, density=densidades[2], col = colores[2]
+    , add=TRUE)
+legend("topright", legend=c("media", "mediana"), col = colores, 
+    density=densidades, fill = colores)
+\end{lstlisting}
+
+\item Una empresa regala una heladera al azar entre $N$ personas. Repite el proceso $n$ veces. ¿Cuál es la probabilidad de que una persona reciba dos heladeras? \\
+a) Primero escriba una función que simule una sola realización del sorteo. Usá el siguiente modelo:
+
+\begin{lstlisting}[language=R]
+una_heladera = function(N, n){
+    # ...
+    return(dos_heladeras_bool)
+}
+\end{lstlisting}
+
+b) Use el siguiente código para obtener un vector con los resultados de correr la función anterior $k$ veces.
+
+\begin{lstlisting}[language=R]
+k = 1000
+N = 40000000
+n = 15000
+reps = replicate(k, una_heladera(N, n))
+\end{lstlisting}
+
+c) Calcule la media muestral de \texttt{reps}, ¿qué representa?.
+
+\item Considere la siguientes tres sucesiones:
+\begin{itemize}
+\item $a_n = \frac{1}{\sqrt{n}} + (\frac{1}{2})^n$
+\item $b_n=(-1)^n + 5$
+\item $c_n = \frac{3n-8}{\&sqrt{16n^2+n}}$
+\end{itemize}
+
+a) Grafique los primeros $n=100$ términos de cada sucesión. \\
+b) Decida si las sucesiones son convergentes y en tal caso agregue una línea horizontal al gráfico.
+
+\item Considere las siguientes funciones:
+\begin{itemize}
+\item $l_2(x) = x^2$
+\item $l_1(x) = |x|$
+\item $\rho _k(x) = x^2 * I_{(|x| \leq k)} + 2k|x| - k^2 * I_{(|x| > k)}$
+\end{itemize}
+
+para $x \in \left[-10,10 \right]$, grafique $\rho _k$ con $k=5$ junto a las otras funciones con distintos colores y una leyenda.
+
+ \item Grafique el polinomio interpolador de Lagrange en $n+1$ puntos equiespaciados en el intervalo $\left[-1,1 \right]$ , con $n=5$,$10$,$15$, para los valores generados por las siguientes funciones:
+
+\begin{itemize}
+\item $f_1(x) = \frac{1}{25x^2}$
+\item $f_2(x) = \sin (\pi x)$
+\end{itemize}
+
+\end{enumerate}
+
+\end{document}
